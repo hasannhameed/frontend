@@ -1,0 +1,55 @@
+
+.home{
+    position: relative;
+}
+.banner-img{
+    width: 100%;
+}
+.hear-caption{
+    background: #000000bd;
+    top: 0;
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(-14px);
+    mask-image: linear-gradient(to right, black 50%, transparent 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+.cl svg{
+    color: black !important;
+}
+.caption-img{
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 30px;
+}
+.info{
+    margin-top: 10px;
+    color: #a3a3a3;
+}
+.info span{
+   
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    max-width: 100%;
+}
+.hear-caption p{
+    width: 85%;
+    max-width: 550px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
