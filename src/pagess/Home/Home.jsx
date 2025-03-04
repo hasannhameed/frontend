@@ -6,6 +6,7 @@ import heroimg from  '../../assets/venom.jpg'
 import title from '../../assets/venom-title.png'
 import { FaPlay,FaInfoCircle } from "react-icons/fa";
 import TitleCard from '../../Components/TitleCard/TitleCard'
+import Footer from '../../Components/Footer/Footer';
 
 
 const Home = () => {
@@ -61,11 +62,15 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div>
       <TitleCard title="Popular on Netflix" movies={marvelMovies} />
+      </div>
+      
       <TitleCard title="Batman Collection" movies={batmanMovies} />
       <TitleCard title="Superman Collection" movies={supermanMovies} />
       <TitleCard title="Avengers Movies" movies={avengersMovies} />
       <TitleCard title="Disney Classics" movies={disneyMovies} />
+      <Footer />
     </div>
   )
 }
