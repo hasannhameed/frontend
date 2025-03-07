@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react'; 
 import "./TitleCard.css";
 
 const TitleCard = ({ title, movies }) => {
+  const navigate = useNavigate();
   const sliderRef = useRef(null);
   const scrollAmount = 100;
   
@@ -28,6 +29,8 @@ const TitleCard = ({ title, movies }) => {
             alt={movie?.Title}
             key={movie?.imdbID}
             src={movie?.Poster !== "N/A" ? movie?.Poster : "placeholder.jpg"}
+               onClick={() => navigate(`/player/${movie.imdbID}`)} // Navigate to Player with ID
+              style={{ cursor: "pointer" }} // Show it's clickable
           />
         ))}
       </div>

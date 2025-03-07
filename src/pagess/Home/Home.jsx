@@ -20,6 +20,7 @@ const Home = () => {
     try {
       const response = await fetch(`https://www.omdbapi.com/?s=${query}&type=movie&apikey=${API_KEY}`);
       const data = await response.json();
+      console.log("data:",data);
       if (data.Search) {
         setMovies(data.Search);
       }
@@ -46,7 +47,7 @@ const Home = () => {
           <div className="hear-caption">
               <div>
                 <img src={title} alt="" className='caption-img' />
-                <h2 class="title-title" data-uia="title-info-title">Venom: The Last Dance</h2>
+                <h2 className="title-title" data-uia="title-info-title">Venom: The Last Dance</h2>
                 <p className="info">2024 | <span>U/A 16+ </span>| 1h 48m | Action</p>
                 <p>Still on the run, journalist Eddie Brock and his alien companion Venom dodge threats from a vigilant military leader and ruthless invading symbiotes.</p>
                 <p><span className="info">Starring:</span> Tom Hardy, Juno Temple, Chiwetel Ejiofor</p>

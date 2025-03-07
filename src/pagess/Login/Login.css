@@ -1,0 +1,64 @@
+.login {
+    height: 100vh;
+    background-image:linear-gradient(#0000007e,#0000007e), url("https://singh-cp.github.io/netflix-landingpage/images/netflix-background-image.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-form{
+    margin: 0 auto;
+    background: rgb(0 0 0 / 70%);
+    /* //-webkit-backdrop-filter: blur(5px);
+    //backdrop-filter: blur(5px); */
+    color: grey;
+    
+}
+.login-form span{
+    cursor: pointer;
+    
+}
+.login-form label{
+    color: grey;
+    
+}
+.login-form .form-control{
+    border-radius: 0px;
+    padding: 8px 20px;
+    background: #80808087;
+    margin:20px 0px;
+    width: 100%;
+    border: none;
+    color: white;
+    border:2px solid  #80808087;
+}
+.login-form .form-control:focus{
+    background: transparent;
+    border:2px solid white;
+    color: #dcdcdc7a;
+    color: white;
+}
+
+.login-form .form-control::placeholder{
+    border-radius: 0px;
+    color: #dcdcdc7a;
+    margin:20px 0px;
+    width: 100%;
+}
+.login-form button{
+    background-color: rgb(210 47 39);
+    color: white;
+}
+.login-form p{
+    margin: #a69d9d;
+    color : #767676;
+}
+.login img{
+    width: 139px;
+    position: absolute;
+    top: 3%;
+    left: 2%;
+}
