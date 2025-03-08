@@ -1,48 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
+const OMDB_API_KEY = "f263eb07"; 
 
 const Player = () => {
-  const { id } = useParams();  // Get IMDb ID from URL
-  const [videoKey, setVideoKey] = useState("");
-  const TMDB_API_KEY = "f263eb07";
+  const { id } = useParams();
+  const [movieTitle, setMovieTitle] = useState("");
 
   useEffect(() => {
-    const fetchTrailer = async () => {
+    const fetchMovieDetails = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/find/${id}?api_key=${TMDB_API_KEY}&external_source=imdb_id`
+        const omdbResponse = await fetch(
+          `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}`
         );
-        const data = await response.json();
-        if (!data.movie_results.length) return;
+        const omdbData = await omdbResponse.json();
 
-        const movieId = data.movie_results[0].id;
-
-        const videoResponse = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_API_KEY}`
-        );
-        const videoData = await videoResponse.json();
-
-        const trailer = videoData.results.find(vid => vid.type === "Trailer" && vid.site === "YouTube");
-
-        if (trailer) {
-          setVideoKey(trailer.key); 
+        if (omdbData.Response === "True") {
+          setMovieTitle(omdbData.Title);
+          console.log("https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(movieTitle + "+trailer);
         }
       } catch (error) {
-        console.error("Error fetching trailer:", error);
+        console.error("Error fetching OMDb data:", error);
       }
     };
 
-    fetchTrailer();
+    fetchMovieDetails();
   }, [id]);
 
   return (
     <div>
-      {videoKey ? (
+      <h1>{movieTitle}</h1>
+      {movieTitle ? (
         <iframe
           width="100%"
           height="750"
-          src={`https://www.youtube.com/embed/${videoKey}`}
+          src={`https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(movieTitle + " trailer")}`}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
