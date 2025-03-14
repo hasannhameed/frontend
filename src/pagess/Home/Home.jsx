@@ -7,9 +7,12 @@ import title from '../../assets/venom-title.png'
 import { FaPlay,FaInfoCircle } from "react-icons/fa";
 import TitleCard from '../../Components/TitleCard/TitleCard'
 import Footer from '../../Components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Home = () => {
+  const navigate = useNavigate();
   const [marvelMovies, setMarvelMovies] = useState([]);
   const [batmanMovies, setBatmanMovies] = useState([]);
   const [supermanMovies, setSupermanMovies] = useState([]);
@@ -20,7 +23,6 @@ const Home = () => {
     try {
       const response = await fetch(`https://www.omdbapi.com/?s=${query}&type=movie&apikey=${API_KEY}`);
       const data = await response.json();
-      console.log("data:",data);
       if (data.Search) {
         setMovies(data.Search);
       }
@@ -42,8 +44,14 @@ const Home = () => {
       
       <div className="home">
         <Navbar/>
-        <div className='hero'>
-          <img src={heroimg} alt="" className="banner-img" />
+        <div className='hero'  
+          style={{
+             backgroundImage: `url(${heroimg})`,
+              backgroundSize: "cover",
+               backgroundPosition: "center" ,
+               height:"100vh"
+               }}>
+          
           <div className="hear-caption">
               <div>
                 <img src={title} alt="" className='caption-img' />
@@ -52,8 +60,17 @@ const Home = () => {
                 <p>Still on the run, journalist Eddie Brock and his alien companion Venom dodge threats from a vigilant military leader and ruthless invading symbiotes.</p>
                 <p><span className="info">Starring:</span> Tom Hardy, Juno Temple, Chiwetel Ejiofor</p>
                 <div className="d-flex gap-4 d-inline-flex">
-                <button className="btn btn-light px-5">
-                <FaPlay style={{ fill: "black" }} /> Play
+                <button className="btn btn-light px-5" onClick={() => {
+                    navigate("/player", {
+                      state: {
+                        movie: {
+                          Title: "Venom: The Last Dance"
+                        }
+                      }
+                    });
+                  }}>
+                  <FaPlay style={{ fill: "black" }} /> Play
+                  
                 </button>
                 <button className="btn btn-secondary cl px-5">
                   <FaInfoCircle /> Info

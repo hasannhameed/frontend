@@ -29,8 +29,9 @@ const TitleCard = ({ title, movies }) => {
             alt={movie?.Title}
             key={movie?.imdbID}
             src={movie?.Poster !== "N/A" ? movie?.Poster : "placeholder.jpg"}
-               onClick={() => navigate(`/player/${movie.imdbID}`)} // Navigate to Player with ID
-              style={{ cursor: "pointer" }} // Show it's clickable
+            onClick={() => navigate(`/player/`,{state:{movie}})}
+ 
+              style={{ cursor: "pointer" }}
           />
         ))}
       </div>

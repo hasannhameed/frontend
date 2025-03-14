@@ -20,3 +20,5 @@ const movieIds = [
   "tt0114369", // Se7en
   "tt0047478", // Seven Samurai
 ];
+
+export default movieIds;

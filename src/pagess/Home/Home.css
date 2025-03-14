@@ -1,6 +1,10 @@
 
 .home{
     position: relative;
+    
+}
+.hero{
+    height:"100vh"
 }
 .banner-img{
     width: 100%;
@@ -53,3 +57,9 @@
     font-size: 16px;
     margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 600px) {
+    .hero{
+        height:"50vh"
+    }
+  }

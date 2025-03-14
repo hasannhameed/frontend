@@ -1,47 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-
-const OMDB_API_KEY = "f263eb07"; 
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FaArrowCircleLeft } from "react-icons/fa";
+import "./Player.css";
 
 const Player = () => {
-  const { id } = useParams();
-  const [movieTitle, setMovieTitle] = useState("");
+  const API_KEY = "AIzaSyBkzotL6kWXT54PUgpOzbv4IQ8mNRBBwWk";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const movie = location.state?.movie || {}; 
+  const [videoId, setVideoId] = useState("");
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const omdbResponse = await fetch(
-          `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}`
-        );
-        const omdbData = await omdbResponse.json();
 
-        if (omdbData.Response === "True") {
-          setMovieTitle(omdbData.Title);
-          console.log("https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(movieTitle + "+trailer);
+    const fetchTrailer = async () => {
+      if (!movie.Title) return; 
+  
+      const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+        movie.Title + " trailer"
+      )}&key=${API_KEY}&maxResults=1&type=video`;
+  
+      try {
+        const response = await fetch(searchUrl);
+        const data = await response.json();
+  
+        if (data.items.length > 0) {
+          setVideoId(data.items[0].id.videoId);
         }
       } catch (error) {
-        console.error("Error fetching OMDb data:", error);
+        console.error("Error fetching trailer:", error);
       }
     };
-
-    fetchMovieDetails();
-  }, [id]);
+  
+    fetchTrailer();
+  }, [movie.Title]);
+  
 
   return (
-    <div>
-      <h1>{movieTitle}</h1>
-      {movieTitle ? (
+    <div className="player-container">
+      <div className="overlay2">
+        <FaArrowCircleLeft className="back-button" onClick={() => navigate(-1)} />
+      </div>
+
+      {videoId ? (
         <iframe
           width="100%"
-          height="750"
-          src={`https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(movieTitle + " trailer")}`}
-          title="YouTube video player"
+          height="100%"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+          title="Movie Trailer"
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="autoplay; encrypted-media"
           allowFullScreen
-        />
+          className="trailer-video"
+        ></iframe>
       ) : (
-        <p>Loading trailer...</p>
+        <h2 className="text-center">Loading Trailer...</h2>
       )}
     </div>
   );
